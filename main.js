@@ -8,14 +8,20 @@ function countChar() {
 }
 
 function remainingChar() {
-    let r = 50 - countChar();
+    let r = textEl.getAttribute("maxlength") - countChar();
     return r;
 }
 
-textEl.addEventListener("keyup", () => {
+function realTimeCounter() {
     // console.log(countChar());
     // console.log(remainingChar());
    totalEl.innerText = countChar();
-   remainingEl.innerText = remainingChar(); 
-})
+   remainingEl.innerText = remainingChar();
+   localStorage.setItem("text", textEl.value);
+   textEl.value = localStorage.getItem("text");
+}
+
+textEl.value = localStorage.getItem("text");
+textEl.addEventListener("keyup", realTimeCounter)
+realTimeCounter();
 
